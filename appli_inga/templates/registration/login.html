@@ -1,0 +1,49 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Connexion - Observatoire Grand Inga{% endblock %}
+
+{% block content %}
+
+<div style="max-width:420px;margin:60px auto;background:#fff;padding:36px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+    <h2 style="text-align:center;margin-bottom:8px;color:#0e1a2b;">Connexion</h2>
+    <p style="text-align:center;font-size:13px;color:#6a7a8a;margin-bottom:24px;">
+        Accédez à votre espace
+    </p>
+
+    {% if form.errors %}
+        <div style="background:#fde8e8;color:#9a2a2a;padding:10px 14px;border-radius:6px;margin-bottom:16px;font-size:13px;">
+            Identifiants incorrects. Veuillez réessayer.
+        </div>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+
+        <div style="margin-bottom:14px;">
+            <label for="id_username" style="display:block;font-weight:600;font-size:13px;color:#3a4a5a;margin-bottom:4px;">
+                Nom d'utilisateur
+            </label>
+            <input type="text" name="username" id="id_username" required autofocus
+                   style="width:100%;padding:8px 12px;border:1px solid #d0d8e0;border-radius:6px;font-size:14px;" />
+        </div>
+
+        <div style="margin-bottom:20px;">
+            <label for="id_password" style="display:block;font-weight:600;font-size:13px;color:#3a4a5a;margin-bottom:4px;">
+                Mot de passe
+            </label>
+            <input type="password" name="password" id="id_password" required
+                   style="width:100%;padding:8px 12px;border:1px solid #d0d8e0;border-radius:6px;font-size:14px;" />
+        </div>
+
+        <button type="submit" class="btn" style="width:100%;justify-content:center;padding:10px;">
+            Se connecter
+        </button>
+    </form>
+
+    <p style="text-align:center;font-size:13px;color:#6a7a8a;margin-top:20px;">
+        Pas de compte ?
+        <a href="{% url 'register' %}" style="color:#2a6bb0;font-weight:500;">Inscrivez-vous</a>
+    </p>
+</div>
+
+{% endblock %}

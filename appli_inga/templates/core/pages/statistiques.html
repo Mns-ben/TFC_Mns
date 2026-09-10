@@ -1,0 +1,63 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Statistiques - Observatoire Grand Inga{% endblock %}
+
+{% block content %}
+
+<div class="app-layout">
+    {% include 'base/sidebar.html' %}
+    <div class="app-content">
+
+<h2 class="section-title">
+    <span class="title-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg></span>
+    Statistiques et analyses
+</h2>
+
+<div class="charts-row">
+    <div class="chart-box">
+        <h3>Impacts des acteurs par type</h3>
+        <div class="bar-chart">
+            {% for item in impacts_par_type %}
+                <div class="bar" style="height:{% widthratio item.nb 5 100 %}px;background:#27ae60;">{{ item.nb }}</div>
+            {% empty %}
+                <p class="text-muted">Aucune donnée</p>
+            {% endfor %}
+        </div>
+        <div class="chart-labels">
+            {% for item in impacts_par_type %}
+                <span>{{ item.type_impact|capfirst }}</span>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="chart-box">
+        <h3>Impacts environnementaux</h3>
+        <div class="stats-list">
+            <div class="stat-row"><span>Surface ennoyée</span><strong>~{{ impacts_env.surface_totale|default:"1 500" }} km²</strong></div>
+            <div class="stat-row"><span>Volume réservoir</span><strong>~{{ impacts_env.volume_total|default:"12 000" }} M m³</strong></div>
+            <div class="stat-row"><span>Population déplacée</span><strong>~{{ impacts_env.population_totale|default:"30 000" }} personnes</strong></div>
+            <div class="stat-row"><span>Bilan carbone</span><strong>~{{ impacts_env.bilan_carbone_total|default:"2,5" }} M T CO₂</strong></div>
+        </div>
+    </div>
+</div>
+
+<div class="table-wrap">
+    <h3>Acteurs les plus influents</h3>
+    <table>
+        <thead><tr><th>Acteur</th><th>Nb impacts</th><th>Importance moyenne</th></tr></thead>
+        <tbody>
+            {% for acteur in acteurs_influents %}
+            <tr>
+                <td><a href="{% url 'acteur_detail' acteur.id %}" class="link">{{ acteur.nom }}</a></td>
+                <td>{{ acteur.nb_impacts }}</td>
+                <td>{{ acteur.importance_moyenne|floatformat:1 }}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="3" class="text-muted">Aucune donnée.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+    </div>
+</div>
+
+{% endblock %}

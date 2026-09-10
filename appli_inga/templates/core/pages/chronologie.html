@@ -1,0 +1,43 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}Chronologie - Observatoire Grand Inga{% endblock %}
+
+{% block content %}
+
+<div class="app-layout">
+    {% include 'base/sidebar.html' %}
+    <div class="app-content">
+
+<h2 class="section-title">
+    <span class="title-icon"><svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg></span>
+    Frise chronologique
+</h2>
+
+<form method="get" class="frise-filters">
+    <label>Période :</label>
+    <input type="date" name="date_debut" value="{{ date_debut|default:'' }}" />
+    -
+    <input type="date" name="date_fin" value="{{ date_fin|default:'' }}" />
+    <label>Type :</label>
+    <select name="type">
+        <option value="tous" {% if type_filtre == 'tous' %}selected{% endif %}>Tous</option>
+        <option value="etapes" {% if type_filtre == 'etapes' %}selected{% endif %}>Étapes</option>
+        <option value="evenements" {% if type_filtre == 'evenements' %}selected{% endif %}>Événements</option>
+    </select>
+    <button type="submit" class="btn">Filtrer</button>
+    <button type="button" class="btn btn-outline" style="margin-left:auto;" data-action="export-pdf">Exporter PDF</button>
+</form>
+
+<!-- FRISE (via partial) -->
+{% include 'core/partials/chronologie_frise.html' with entrees=entrees %}
+
+<div class="frise-details">
+    <p><strong>Détails sélectionnés :</strong> <span style="color:#2a6bb0;">Cliquez sur un point pour voir les détails</span></p>
+    <p class="source">Source : Archives, rapports SNEL, Banque mondiale</p>
+</div>
+
+    </div>
+</div>
+
+{% endblock %}

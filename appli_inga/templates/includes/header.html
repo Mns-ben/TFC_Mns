@@ -1,0 +1,28 @@
+{% load static %}
+<header class="app-header">
+    <div class="logo">
+        <div class="svg-icon">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <rect width="100" height="100" rx="12" fill="#0e1a2b"/>
+                <rect x="15" y="50" width="70" height="35" rx="4" fill="#2a6bb0"/>
+                <rect x="25" y="30" width="10" height="55" rx="2" fill="#4a8ac0"/>
+                <rect x="40" y="25" width="10" height="60" rx="2" fill="#4a8ac0"/>
+                <rect x="55" y="20" width="10" height="65" rx="2" fill="#4a8ac0"/>
+                <rect x="70" y="30" width="10" height="55" rx="2" fill="#4a8ac0"/>
+                <path d="M10 85 L90 85 L95 90 L5 90 Z" fill="#6a8aaa"/>
+                <path d="M10 50 L30 70 L50 55 L70 70 L90 50 L90 85 L10 85 Z" fill="#3a6a9a" opacity="0.3"/>
+            </svg>
+        </div>
+        <h1>Observatoire <span>Grand Inga</span></h1>
+    </div>
+    <div class="user-info">
+        {% if user.is_authenticated %}
+            <div class="avatar">{{ user.username|first|upper }}</div>
+            <span>{{ user.username }}</span>
+            <a href="{% url 'logout' %}">Déconnexion</a>
+        {% else %}
+            <a href="{% url 'login' %}">Connexion</a>
+            <a href="{% url 'register' %}">Inscription</a>
+        {% endif %}
+    </div>
+</header>

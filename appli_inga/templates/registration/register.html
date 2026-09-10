@@ -1,0 +1,80 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Inscription - Observatoire Grand Inga{% endblock %}
+
+{% block content %}
+
+<div style="max-width:480px;margin:60px auto;background:#fff;padding:36px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+    <h2 style="text-align:center;margin-bottom:8px;color:#0e1a2b;">Créer un compte</h2>
+    <p style="text-align:center;font-size:13px;color:#6a7a8a;margin-bottom:24px;">
+        Rejoignez l'Observatoire Grand Inga
+    </p>
+
+    {% if form.non_field_errors %}
+        <div style="background:#fde8e8;color:#9a2a2a;padding:10px 14px;border-radius:6px;margin-bottom:16px;font-size:13px;">
+            {{ form.non_field_errors }}
+        </div>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+
+        {# ---------- Nom d'utilisateur ---------- #}
+        <div style="margin-bottom:14px;">
+            <label for="{{ form.username.id_for_label }}" style="display:block;font-weight:600;font-size:13px;color:#3a4a5a;margin-bottom:4px;">
+                Nom d'utilisateur <span style="color:#c0392b;">*</span>
+            </label>
+            <input type="text" name="{{ form.username.name }}" id="{{ form.username.id_for_label }}"
+                   value="{{ form.username.value|default:'' }}"
+                   required maxlength="150"
+                   style="width:100%;padding:8px 12px;border:1px solid #d0d8e0;border-radius:6px;font-size:14px;" />
+            {% if form.username.help_text %}
+                <p style="font-size:11px;color:#6a7a8a;margin-top:4px;">{{ form.username.help_text }}</p>
+            {% endif %}
+            {% if form.username.errors %}
+                <p style="color:#c0392b;font-size:12px;margin-top:4px;">{{ form.username.errors.0 }}</p>
+            {% endif %}
+        </div>
+
+        {# ---------- Mot de passe 1 ---------- #}
+        <div style="margin-bottom:14px;">
+            <label for="{{ form.password1.id_for_label }}" style="display:block;font-weight:600;font-size:13px;color:#3a4a5a;margin-bottom:4px;">
+                Mot de passe <span style="color:#c0392b;">*</span>
+            </label>
+            <input type="password" name="{{ form.password1.name }}" id="{{ form.password1.id_for_label }}"
+                   required
+                   style="width:100%;padding:8px 12px;border:1px solid #d0d8e0;border-radius:6px;font-size:14px;" />
+            {% if form.password1.help_text %}
+                <div style="font-size:11px;color:#6a7a8a;margin-top:4px;">{{ form.password1.help_text|safe }}</div>
+            {% endif %}
+            {% if form.password1.errors %}
+                <p style="color:#c0392b;font-size:12px;margin-top:4px;">{{ form.password1.errors.0 }}</p>
+            {% endif %}
+        </div>
+
+        {# ---------- Mot de passe 2 (confirmation) ---------- #}
+        <div style="margin-bottom:20px;">
+            <label for="{{ form.password2.id_for_label }}" style="display:block;font-weight:600;font-size:13px;color:#3a4a5a;margin-bottom:4px;">
+                Confirmer le mot de passe <span style="color:#c0392b;">*</span>
+            </label>
+            <input type="password" name="{{ form.password2.name }}" id="{{ form.password2.id_for_label }}"
+                   required
+                   style="width:100%;padding:8px 12px;border:1px solid #d0d8e0;border-radius:6px;font-size:14px;" />
+            {% if form.password2.errors %}
+                <p style="color:#c0392b;font-size:12px;margin-top:4px;">{{ form.password2.errors.0 }}</p>
+            {% endif %}
+        </div>
+
+        {# ---------- Bouton ---------- #}
+        <button type="submit" class="btn" style="width:100%;justify-content:center;padding:10px;">
+            Créer mon compte
+        </button>
+    </form>
+
+    <p style="text-align:center;font-size:13px;color:#6a7a8a;margin-top:20px;">
+        Déjà un compte ?
+        <a href="{% url 'login' %}" style="color:#2a6bb0;font-weight:500;">Connectez-vous</a>
+    </p>
+</div>
+
+{% endblock %}

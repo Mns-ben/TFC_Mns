@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>{% block title %}Observatoire Grand Inga{% endblock %}</title>
+
+    <!-- ArcGIS API -->
+    <link rel="stylesheet" href="https://js.arcgis.com/4.28/esri/themes/dark/main.css" />
+    <script src="https://js.arcgis.com/4.28/"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/chronologie.css' %}">
+
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+    <!-- HEADER -->
+    {% include 'includes/header.html' %}
+
+    <!-- NAVIGATION -->
+    {% include 'includes/navigation.html' %}
+
+    <!-- MESSAGES -->
+    {% include 'includes/messages.html' %}
+
+    <!-- CONTENU PRINCIPAL -->
+    <main class="app-main">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- FOOTER -->
+    {% include 'includes/footer.html' %}
+
+    <!-- JS -->
+    <script src="{% static 'js/main.js' %}"></script>
+
+    {% block extra_js %}{% endblock %}
+
+</body>
+</html>

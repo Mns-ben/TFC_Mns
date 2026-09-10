@@ -1,0 +1,367 @@
+/* ================================================================
+   OBSERVATOIRE GRAND INGA - STYLES CHRONOLOGIE, ACTEURS, CARTE
+   Fichier : static/css/chronologie.css
+   ================================================================ */
+
+/* ================================================================
+   1. FRISE CHRONOLOGIQUE
+   ================================================================ */
+
+.frise-filters {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+    align-items: center;
+}
+
+.frise-filters label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #3a4a5a;
+}
+
+.frise-filters input,
+.frise-filters select {
+    padding: 5px 12px;
+    border: 1px solid #d0d8e0;
+    border-radius: 6px;
+    font-size: 13px;
+    background: #fff;
+}
+
+.frise-wrapper {
+    background: #fff;
+    border-radius: 10px;
+    padding: 28px 20px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 16px;
+}
+
+.frise-line {
+    position: relative;
+    height: 4px;
+    background: #d0d8e0;
+    margin: 30px 20px 24px;
+    border-radius: 2px;
+}
+
+.frise-line::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: -4px;
+    width: 14px;
+    height: 12px;
+    background: #2a6bb0;
+    border-radius: 50%;
+}
+
+.frise-line::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: -4px;
+    width: 14px;
+    height: 12px;
+    background: #2a6bb0;
+    border-radius: 50%;
+}
+
+.frise-points {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin: -16px 0 6px;
+    flex-wrap: wrap;
+}
+
+.frise-point {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    width: 56px;
+    text-align: center;
+    transition: 0.2s;
+}
+
+.frise-point:hover {
+    transform: translateY(-4px);
+}
+
+.frise-point .dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 2px #2a6bb0;
+    margin-bottom: 4px;
+    transition: 0.2s;
+}
+
+.frise-point .dot.etape {
+    background: #2a6bb0;
+    box-shadow: 0 0 0 2px #2a6bb0;
+}
+
+.frise-point .dot.evenement {
+    background: #e67e22;
+    box-shadow: 0 0 0 2px #e67e22;
+}
+
+.frise-point .titre {
+    font-size: 10px;
+    font-weight: 500;
+    color: #2a3a4a;
+    line-height: 1.2;
+}
+
+.frise-point .annee {
+    font-size: 9px;
+    color: #6a7a8a;
+}
+
+/* ---------- DETAILS SOUS LA FRISE ---------- */
+.frise-details {
+    background: #fff;
+    border-radius: 10px;
+    padding: 14px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    margin-top: 16px;
+}
+
+.frise-details p {
+    font-size: 14px;
+    color: #4a5a6a;
+    margin-bottom: 6px;
+}
+
+.frise-details p:last-child {
+    margin-bottom: 0;
+}
+
+.frise-details strong {
+    color: #0e1a2b;
+}
+
+.frise-details .source {
+    font-size: 13px;
+    color: #6a7a8a;
+}
+
+/* ================================================================
+   2. ACTEURS
+   ================================================================ */
+
+.acteur-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+}
+
+.acteur-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 16px 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    transition: 0.2s;
+    cursor: pointer;
+    border-left: 4px solid #2a6bb0;
+}
+
+.acteur-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.10);
+}
+
+.acteur-card .nom {
+    font-size: 17px;
+    font-weight: 600;
+    color: #0e1a2b;
+}
+
+.acteur-card .type {
+    font-size: 13px;
+    color: #6a7a8a;
+}
+
+.acteur-card .pays {
+    font-size: 13px;
+    color: #4a5a6a;
+    margin-top: 2px;
+}
+
+.acteur-card .impacts {
+    margin-top: 6px;
+    font-size: 12px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.acteur-card .impacts span {
+    background: #eef2f7;
+    padding: 2px 10px;
+    border-radius: 12px;
+    color: #3a4a5a;
+}
+
+/* ---------- FICHE DÉTAILLÉE ACTEUR ---------- */
+.acteur-detail {
+    background: #fff;
+    border-radius: 10px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    margin-bottom: 20px;
+}
+
+.acteur-detail h2 {
+    font-size: 24px;
+    color: #0e1a2b;
+    margin-bottom: 8px;
+}
+
+.acteur-detail .meta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+    font-size: 14px;
+    color: #4a5a6a;
+}
+
+.acteur-detail .meta span {
+    background: #eef2f7;
+    padding: 4px 12px;
+    border-radius: 12px;
+}
+
+.acteur-detail .description {
+    font-size: 15px;
+    color: #3a4a5a;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+/* ================================================================
+   3. CARTE ARCGIS
+   ================================================================ */
+
+#viewDiv {
+    height: 480px;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+}
+
+.carte-controls {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+    align-items: center;
+}
+
+.carte-controls .btn {
+    font-size: 12px;
+    padding: 5px 14px;
+}
+
+.carte-controls .api-version {
+    margin-left: auto;
+    font-size: 12px;
+    color: #6a7a8a;
+}
+
+/* ---------- LÉGENDE DE LA CARTE ---------- */
+.carte-legend {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: #fff;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #3a4a5a;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.carte-legend span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.carte-legend .color-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.color-dot.blue {
+    background: #2a6bb0;
+}
+
+.color-dot.orange {
+    background: #e67e22;
+}
+
+.color-dot.red {
+    background: #c0392b;
+}
+
+.color-dot.green {
+    background: #27ae60;
+}
+
+/* ================================================================
+   4. PAGE ADMINISTRATION
+   ================================================================ */
+
+.admin-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+}
+
+.admin-actions .btn {
+    font-size: 13px;
+    padding: 6px 14px;
+}
+
+/* ================================================================
+   5. RESPONSIVE
+   ================================================================ */
+
+@media (max-width: 768px) {
+    .frise-points {
+        justify-content: center;
+        gap: 10px;
+    }
+    #viewDiv {
+        height: 320px;
+    }
+    .carte-legend {
+        font-size: 12px;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .acteur-grid {
+        grid-template-columns: 1fr;
+    }
+    .frise-point {
+        width: 48px;
+    }
+    .frise-point .titre {
+        font-size: 9px;
+    }
+}

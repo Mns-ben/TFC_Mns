@@ -1,0 +1,34 @@
+{% comment %}
+   COMPOSANT : Barre de recherche et filtres
+{% endcomment %}
+
+<form method="get" class="search-bar">
+    <input type="text"
+           name="q"
+           value="{{ recherche|default:'' }}"
+           placeholder="{{ placeholder|default:'Rechercher...' }}" />
+
+    {% for filtre in filtres %}
+        <select name="{{ filtre.name }}">
+            <option value="">{{ filtre.label_defaut }}</option>
+            {% for option in filtre.options %}
+                <option value="{{ option.value }}"
+                        {% if filtre.selected == option.value %}selected{% endif %}>
+                    {{ option.label }}
+                </option>
+            {% endfor %}
+        </select>
+    {% endfor %}
+
+    <button type="submit" class="btn">Rechercher</button>
+
+    {% if recherche %}
+        <a href="?" class="btn btn-outline" title="Réinitialiser">✕ Réinitialiser</a>
+    {% endif %}
+</form>
+
+{% if recherche %}
+    <p class="text-muted" style="margin-bottom:12px;">
+        Résultats pour : <strong>« {{ recherche }} »</strong>
+    </p>
+{% endif %}

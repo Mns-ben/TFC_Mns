@@ -1,0 +1,42 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Acteurs - Observatoire Grand Inga{% endblock %}
+
+{% block content %}
+<div class="app-layout">
+    {% include 'base/sidebar.html' %}
+    <div class="app-content">
+
+<h2 class="section-title">
+    <span class="title-icon"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></span>
+    Acteurs du projet
+</h2>
+
+<!-- RECHERCHE (via partial) -->
+{% include 'core/partials/recherche.html' with placeholder="Rechercher un acteur..." filtres=filtres %}
+
+<!-- GRILLE D'ACTEURS -->
+<div class="acteur-grid">
+    {% for acteur in acteurs %}
+        <div class="acteur-card" data-id="{{ acteur.id }}">
+            <div class="nom">{{ acteur.nom }}</div>
+            <div class="type">{{ acteur.get_type_acteur_display }}</div>
+            <div class="pays">{{ acteur.pays|default:"—" }}</div>
+            <div class="impacts">
+                {% with acteur.impacts.all|dictsortreversed:"importance"|first as top_impact %}
+                    {% if top_impact %}
+                        <span>Impact : {{ top_impact.importance }}</span>
+                    {% endif %}
+                {% endwith %}
+                <span>{{ acteur.date_creation|date:"Y"|default:"—" }}</span>
+            </div>
+        </div>
+    {% empty %}
+        <p class="text-muted">Aucun acteur trouvé.</p>
+    {% endfor %}
+</div>
+
+    </div>
+</div>
+
+{% endblock %}

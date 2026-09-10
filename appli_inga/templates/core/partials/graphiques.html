@@ -1,0 +1,23 @@
+{% comment %}
+   COMPOSANT : Graphiques en barres
+{% endcomment %}
+
+<div class="chart-box">
+    <h3>{{ titre|default:"Graphique" }}</h3>
+    <div class="bar-chart">
+        {% for item in donnees %}
+            <div class="bar"
+                 style="height:{% widthratio item.valeur max_valeur|default:5 110 %}px;background:{{ item.couleur|default:'#2a6bb0' }};"
+                 title="{{ item.label }} : {{ item.valeur }}">
+                {{ item.valeur }}
+            </div>
+        {% empty %}
+            <p class="text-muted">Aucune donnée disponible.</p>
+        {% endfor %}
+    </div>
+    <div class="chart-labels">
+        {% for item in donnees %}
+            <span>{{ item.label }}</span>
+        {% endfor %}
+    </div>
+</div>

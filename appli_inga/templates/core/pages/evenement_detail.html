@@ -1,0 +1,46 @@
+{% extends 'base/base.html' %}
+
+{% block title %}{{ evenement.titre }} - Observatoire Grand Inga{% endblock %}
+
+{% block content %}
+
+<div class="app-layout">
+    {% include 'base/sidebar.html' %}
+    <div class="app-content">
+
+<div class="acteur-detail">
+    <h2>{{ evenement.titre }}</h2>
+    <div class="meta">
+        <span>{{ evenement.date_evenement|date:"d/m/Y" }}</span>
+        <span class="badge badge-{{ evenement.type_evenement }}">{{ evenement.get_type_evenement_display }}</span>
+        <span>Importance : <span class="importance-{{ evenement.importance }}">{{ evenement.importance }}</span></span>
+    </div>
+    <p class="description">{{ evenement.description|default:"Aucune description." }}</p>
+    {% if evenement.source %}<p class="source">Source : {{ evenement.source }}</p>{% endif %}
+    {% if evenement.localisation %}<p class="source">Localisation : {{ evenement.localisation }}</p>{% endif %}
+</div>
+
+<div class="table-wrap">
+    <h3>Acteurs impliqués</h3>
+    <table>
+        <thead><tr><th>Nom</th><th>Type</th><th>Rôle</th></tr></thead>
+        <tbody>
+            {% for acteur in acteurs_impliques %}
+            <tr>
+                <td><a href="{% url 'acteur_detail' acteur.id %}" class="link">{{ acteur.nom }}</a></td>
+                <td>{{ acteur.get_type_acteur_display }}</td>
+                <td>—</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="3" class="text-muted">Aucun acteur associé.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<a href="{% url 'evenements' %}" class="btn mt-16">← Retour à la liste</a>
+
+    </div>
+</div>
+
+{% endblock %}

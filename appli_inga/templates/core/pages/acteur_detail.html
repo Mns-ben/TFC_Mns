@@ -1,0 +1,69 @@
+{% extends 'base/base.html' %}
+
+{% block title %}{{ acteur.nom }} - Observatoire Grand Inga{% endblock %}
+
+{% block content %}
+
+<div class="app-layout">
+    {% include 'base/sidebar.html' %}
+    <div class="app-content">
+
+<div class="acteur-detail">
+    <h2>{{ acteur.nom }}</h2>
+    <div class="meta">
+        <span>{{ acteur.get_type_acteur_display }}</span>
+        <span>{{ acteur.get_categorie_display }}</span>
+        {% if acteur.pays %}<span>{{ acteur.pays }}</span>{% endif %}
+        {% if acteur.date_creation %}<span>Créé en {{ acteur.date_creation|date:"Y" }}</span>{% endif %}
+    </div>
+    <p class="description">{{ acteur.description|default:"Aucune description disponible." }}</p>
+    {% if acteur.site_web %}
+        <p><a href="{{ acteur.site_web }}" target="_blank" class="link">Visiter le site web</a></p>
+    {% endif %}
+</div>
+
+<!-- IMPACTS -->
+<div class="table-wrap">
+    <h3>Impacts sur le projet ({{ nb_impacts }})</h3>
+    <table>
+        <thead><tr><th>Type</th><th>Description</th><th>Importance</th><th>Date</th></tr></thead>
+        <tbody>
+            {% for impact in impacts %}
+            <tr>
+                <td>{{ impact.get_type_impact_display }}</td>
+                <td>{{ impact.description|truncatechars:80 }}</td>
+                <td class="importance-{{ impact.importance }}">{{ impact.importance }}</td>
+                <td>{{ impact.date_impact|date:"Y"|default:"—" }}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="4" class="text-muted">Aucun impact enregistré.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- ÉVÉNEMENTS -->
+<div class="table-wrap">
+    <h3>Événements associés</h3>
+    <table>
+        <thead><tr><th>Titre</th><th>Date</th><th>Type</th></tr></thead>
+        <tbody>
+            {% for e in evenements %}
+            <tr>
+                <td><a href="{% url 'evenement_detail' e.id %}" class="link">{{ e.titre }}</a></td>
+                <td>{{ e.date_evenement|date:"Y" }}</td>
+                <td><span class="badge badge-{{ e.type_evenement }}">{{ e.get_type_evenement_display }}</span></td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="3" class="text-muted">Aucun événement associé.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<a href="{% url 'acteurs' %}" class="btn mt-16">← Retour à la liste</a>
+
+    </div>
+</div>
+
+{% endblock %}

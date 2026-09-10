@@ -1,0 +1,112 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}Administration - Observatoire Grand Inga{% endblock %}
+
+{% block content %}
+
+<h2 class="section-title">
+    <span class="title-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5L12 1zm0 2.18l7 3.12v4.7c0 4.83-3.57 9.22-7 10.3-3.43-1.08-7-5.47-7-10.3V6.3l7-3.12z"/></svg>
+    </span>
+    Tableau de bord administrateur
+</h2>
+
+<p class="text-muted mb-10">Gérez les données de l'observatoire depuis cette interface.</p>
+
+<!-- STATISTIQUES -->
+<div class="stats-grid">
+    <div class="stat-card">
+        <div class="stat-icon"><svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg></div>
+        <div class="number">{{ nb_etapes }}</div>
+        <div class="label">Étapes</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
+        <div class="number">{{ nb_acteurs }}</div>
+        <div class="label">Acteurs</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon"><svg viewBox="0 0 24 24"><path d="M13 3h-2v10h2V3zm4.83 2.17l-1.42 1.42C17.99 7.86 19 9.81 19 12c0 3.87-3.13 7-7 7s-7-3.13-7-7c0-2.19 1.01-4.14 2.59-5.42L6.17 5.17C4.23 6.82 3 9.26 3 12c0 4.97 4.03 9 9 9s9-4.03 9-9c0-2.74-1.23-5.18-3.17-6.83z"/></svg></div>
+        <div class="number">{{ nb_evenements }}</div>
+        <div class="label">Événements</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg></div>
+        <div class="number">{{ nb_documents }}</div>
+        <div class="label">Documents</div>
+    </div>
+</div>
+
+<!-- ACTIONS RAPIDES (avec SVG au lieu d'emojis) -->
+<div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:16px;margin:24px 0;">
+
+    <a href="{% url 'admin_etapes' %}" class="btn" style="padding:20px;justify-content:center;font-size:14px;text-decoration:none;gap:10px;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg>
+        Gérer les étapes
+    </a>
+
+    <a href="{% url 'admin_acteurs' %}" class="btn" style="padding:20px;justify-content:center;font-size:14px;text-decoration:none;gap:10px;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+        Gérer les acteurs
+    </a>
+
+    <a href="{% url 'admin_evenements' %}" class="btn" style="padding:20px;justify-content:center;font-size:14px;text-decoration:none;gap:10px;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M13 3h-2v10h2V3zm4.83 2.17l-1.42 1.42C17.99 7.86 19 9.81 19 12c0 3.87-3.13 7-7 7s-7-3.13-7-7c0-2.19 1.01-4.14 2.59-5.42L6.17 5.17C4.23 6.82 3 9.26 3 12c0 4.97 4.03 9 9 9s9-4.03 9-9c0-2.74-1.23-5.18-3.17-6.83z"/></svg>
+        Gérer les événements
+    </a>
+
+    <a href="{% url 'admin_documents' %}" class="btn" style="padding:20px;justify-content:center;font-size:14px;text-decoration:none;gap:10px;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+        Gérer les documents
+    </a>
+
+</div>
+
+<!-- DERNIERS ÉVÉNEMENTS -->
+<div class="table-wrap">
+    <h3>Derniers événements</h3>
+    <table>
+        <thead><tr><th>Titre</th><th>Date</th><th>Type</th><th>Actions</th></tr></thead>
+        <tbody>
+            {% for e in derniers_evenements %}
+            <tr>
+                <td>{{ e.titre }}</td>
+                <td>{{ e.date_evenement|date:"Y" }}</td>
+                <td><span class="badge badge-{{ e.type_evenement }}">{{ e.get_type_evenement_display }}</span></td>
+                <td>
+                    <a href="{% url 'admin_evenement_modifier' e.id %}" class="link">Modifier</a> |
+                    <a href="{% url 'admin_evenement_supprimer' e.id %}" class="link">Supprimer</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="4" class="text-muted">Aucun événement.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- DERNIÈRES ÉTAPES -->
+<div class="table-wrap">
+    <h3>Dernières étapes</h3>
+    <table>
+        <thead><tr><th>Nom</th><th>Période</th><th>Statut</th><th>Actions</th></tr></thead>
+        <tbody>
+            {% for etape in dernieres_etapes %}
+            <tr>
+                <td>{{ etape.nom }}</td>
+                <td>{{ etape.date_debut|date:"Y" }}{% if etape.date_fin %} – {{ etape.date_fin|date:"Y" }}{% endif %}</td>
+                <td>{{ etape.get_statut_display }}</td>
+                <td>
+                    <a href="{% url 'admin_etape_modifier' etape.id %}" class="link">Modifier</a> |
+                    <a href="{% url 'admin_etape_supprimer' etape.id %}" class="link">Supprimer</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="4" class="text-muted">Aucune étape.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

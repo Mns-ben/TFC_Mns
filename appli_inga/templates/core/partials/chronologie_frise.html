@@ -1,0 +1,28 @@
+{% comment %}
+   COMPOSANT : Frise chronologique
+{% endcomment %}
+
+<div class="frise-wrapper">
+    <div class="frise-line"></div>
+    <div class="frise-points">
+        {% for entree in entrees %}
+            <div class="frise-point"
+                 data-id="{{ entree.id }}"
+                 data-type="{{ entree.type }}"
+                 title="{{ entree.titre }}">
+                <div class="dot {{ entree.type }}"></div>
+                <span class="titre">{{ entree.titre|truncatechars:18 }}</span>
+                <span class="annee">{{ entree.date|date:"Y" }}</span>
+            </div>
+        {% empty %}
+            <p class="text-muted" style="width:100%;text-align:center;">
+                Aucune entrée pour cette période.
+            </p>
+        {% endfor %}
+    </div>
+</div>
+
+<div style="display:flex;gap:20px;margin-top:12px;font-size:13px;color:#4a5a6a;flex-wrap:wrap;">
+    <span><span class="color-dot blue" style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#2a6bb0;margin-right:6px;"></span> Étape</span>
+    <span><span class="color-dot orange" style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#e67e22;margin-right:6px;"></span> Événement</span>
+</div>

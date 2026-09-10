@@ -1,0 +1,46 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Documents - Observatoire Grand Inga{% endblock %}
+
+{% block content %}
+
+<div class="app-layout">
+    {% include 'base/sidebar.html' %}
+    <div class="app-content">
+
+<h2 class="section-title">
+    <span class="title-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg></span>
+    Bibliothèque documentaire
+</h2>
+
+<!-- RECHERCHE (via partial) -->
+{% include 'core/partials/recherche.html' with placeholder="Rechercher par titre, auteur, mots-clés..." filtres=filtres %}
+
+<!-- TABLEAU -->
+<div class="table-wrap">
+    <table>
+        <thead><tr><th>Titre</th><th>Auteur</th><th>Date</th><th>Type</th><th>État</th><th>Lien</th></tr></thead>
+        <tbody>
+            {% for doc in documents %}
+            <tr>
+                <td>{{ doc.titre }}</td>
+                <td>{{ doc.auteur|default:"—" }}</td>
+                <td>{{ doc.date_publication|date:"Y"|default:"—" }}</td>
+                <td>{{ doc.get_type_document_display }}</td>
+                <td>{{ doc.get_etat_conservation_display }}</td>
+                <td>
+                    {% if doc.url %}<a href="{{ doc.url }}" target="_blank" class="link">Voir</a>
+                    {% elif doc.fichier %}<a href="{{ doc.fichier.url }}" target="_blank" class="link">Télécharger</a>
+                    {% else %}—{% endif %}
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="6" class="text-muted">Aucun document trouvé.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% comment %}
+   COMPOSANT : Carte ArcGIS
+{% endcomment %}
+
+{% load static %}
+
+<div class="carte-controls">
+    <button class="btn btn-sm" id="btnZoomInga">Zoom sur Inga</button>
+    <button class="btn btn-sm btn-outline" id="btnLayerBarrages">Barrages</button>
+    <button class="btn btn-sm btn-outline" id="btnLayerZone">Zone inondée</button>
+    <button class="btn btn-sm btn-outline" id="btnLayerPop">Populations</button>
+    <span class="api-version">ArcGIS API v4.28</span>
+</div>
+
+<div id="viewDiv" style="height: {{ hauteur|default:'480px' }};"></div>
+
+<div class="carte-legend">
+    <span><span class="color-dot blue"></span> Barrages existants</span>
+    <span><span class="color-dot orange"></span> Projets futurs</span>
+    <span><span class="color-dot red"></span> Zones inondées</span>
+    <span><span class="color-dot green"></span> Populations déplacées</span>
+</div>
