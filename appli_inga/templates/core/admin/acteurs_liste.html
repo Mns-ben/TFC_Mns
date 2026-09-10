@@ -1,0 +1,40 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Gestion des acteurs - Admin{% endblock %}
+
+{% block content %}
+
+<h2 class="section-title">Gestion des acteurs</h2>
+
+<div class="admin-actions">
+    <a href="{% url 'admin_acteur_ajouter' %}" class="btn">+ Ajouter un acteur</a>
+    <a href="{% url 'admin_dashboard' %}" class="btn btn-outline">← Retour</a>
+</div>
+
+<div class="table-wrap">
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th><th>Type</th><th>Pays</th><th>Nb impacts</th><th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for a in acteurs %}
+            <tr>
+                <td>{{ a.nom }}</td>
+                <td>{{ a.get_type_acteur_display }}</td>
+                <td>{{ a.pays|default:"—" }}</td>
+                <td>{{ a.impacts.count }}</td>
+                <td>
+                    <a href="{% url 'admin_acteur_modifier' a.id %}" class="link">Modifier</a> |
+                    <a href="{% url 'admin_acteur_supprimer' a.id %}" class="link">Supprimer</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="5" class="text-muted">Aucun acteur.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

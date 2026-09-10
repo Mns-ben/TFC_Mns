@@ -7,10 +7,9 @@ Ce fichier redirige les requêtes vers :
 """
 
 from django.conf import settings
+from django.conf.urls.static import static  # ✅ Import corrigé
 from django.contrib import admin
-from django.conf.urls.static import static          # ✅ Import corrigé
 from django.urls import include, path
-
 
 urlpatterns = [
     # Administration Django native (superuser)

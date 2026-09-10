@@ -57,25 +57,30 @@
     // ============================================================
     // 3. LIENS DANS LES TABLEAUX
     // ============================================================
-    function initTableLinks() {
-        const links = document.querySelectorAll('.table-wrap .link');
-        if (!links.length) return;
+   // ============================================================
+// 3. LIENS DANS LES TABLEAUX
+// ============================================================
+function initTableLinks() {
+    const links = document.querySelectorAll('.table-wrap .link');
+    if (!links.length) return;
 
-        links.forEach(link => {
-            link.addEventListener('click', function(e) {
-                const href = this.dataset.href;
-                if (href) {
-                    // Si un lien est défini, on le suit
-                    window.location.href = href;
-                } else {
-                    e.preventDefault();
-                    // Sinon on affiche un message d'attente
-                    console.log('Action non définie pour ce lien.');
-                }
-            });
+    links.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            
+            // Si le lien a un vrai href (autre que "#"), on le laisse passer
+            if (href && href !== '#' && href !== '') {
+                // Ne pas bloquer, le navigateur suit le lien
+                return;
+            }
+            
+            // Sinon, on bloque
+            e.preventDefault();
+            const action = this.dataset.action || 'Action non définie';
+            alert(action);
         });
-    }
-
+    });
+}
     // ============================================================
     // 4. BOUTONS GÉNÉRIQUES (non spécifiques à la carte)
     // ============================================================

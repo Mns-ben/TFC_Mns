@@ -1,0 +1,41 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Gestion des documents - Admin{% endblock %}
+
+{% block content %}
+
+<h2 class="section-title">Gestion des documents</h2>
+
+<div class="admin-actions">
+    <a href="{% url 'admin_document_ajouter' %}" class="btn">+ Ajouter un document</a>
+    <a href="{% url 'admin_dashboard' %}" class="btn btn-outline">← Retour</a>
+</div>
+
+<div class="table-wrap">
+    <table>
+        <thead>
+            <tr>
+                <th>Titre</th><th>Auteur</th><th>Date</th><th>Type</th><th>État</th><th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for doc in documents %}
+            <tr>
+                <td>{{ doc.titre|truncatechars:50 }}</td>
+                <td>{{ doc.auteur|default:"—" }}</td>
+                <td>{{ doc.date_publication|date:"Y"|default:"—" }}</td>
+                <td>{{ doc.get_type_document_display }}</td>
+                <td>{{ doc.get_etat_conservation_display }}</td>
+                <td>
+                    <a href="{% url 'admin_document_modifier' doc.id %}" class="link">Modifier</a> |
+                    <a href="{% url 'admin_document_supprimer' doc.id %}" class="link">Supprimer</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="6" class="text-muted">Aucun document.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
